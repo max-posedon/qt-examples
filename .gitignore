@@ -22,7 +22,12 @@
 *.a
 *.lib
 
+# Generated files
+moc_*.cpp
+Makefile
+
 # Executables
 *.exe
 *.out
 *.app
+logger/logger
