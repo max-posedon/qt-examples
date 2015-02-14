@@ -3,12 +3,15 @@
 
 #include "logger.h"
 
-Logger logger;
+Logger * logger = nullptr;
 
 void logHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
+    if(logger == nullptr)
+        return;
+
     QMetaObject::invokeMethod(
-        &logger,
+        logger,
         "log",
         Qt::AutoConnection,
         Q_ARG(QtMsgType, type),
@@ -19,8 +22,9 @@ void logHandler(QtMsgType type, const QMessageLogContext &context, const QString
 
 int main(int argc, char **argv)
 {
-    qInstallMessageHandler(logHandler);
     QCoreApplication app(argc, argv);
+    logger = new Logger(&app);
+    qInstallMessageHandler(logHandler);
     qDebug() << "hello world";
     return app.exec();
 }

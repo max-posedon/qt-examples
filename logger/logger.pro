@@ -6,7 +6,7 @@ TEMPLATE = app
 TARGET = logger
 INCLUDEPATH += .
 QT = core
-CONFIG += debug
+CONFIG += debug c++14
 
 # Input
 HEADERS += logger.h
